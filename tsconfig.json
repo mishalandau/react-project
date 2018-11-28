@@ -17,7 +17,20 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "~/*": [
+        "/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+    },
   },
   "exclude": [
     "node_modules",
@@ -26,6 +39,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
+    "config",
     "src/setupTests.ts"
   ]
 }
