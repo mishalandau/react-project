@@ -1,0 +1,56 @@
+[
+    {
+        "id": 10,
+        "name": "product 10",
+        "color": "#35b049",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 11,
+        "name": "product 11",
+        "color": "#16172f",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 12,
+        "name": "product 12",
+        "color": "#ab6f62",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 13,
+        "name": "product 13",
+        "color": "#4e4e4e",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 14,
+        "name": "product 14",
+        "color": "#296997",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 15,
+        "name": "product 15",
+        "color": "#6d9729",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 16,
+        "name": "product 16",
+        "color": "#723e73",
+        "textColor": "#ffffff"
+    },
+    {
+        "id": 17,
+        "name": "product 17",
+        "color": "#88a2f",
+        "textColor": "#000000"
+    },
+    {
+        "id": 18,
+        "name": "product 18",
+        "color": "#4f1c1f",
+        "textColor": "#ffffff"
+    }
+]
