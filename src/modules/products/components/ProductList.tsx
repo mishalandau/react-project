@@ -1,20 +1,21 @@
 import '@modules/products/products.css';
 import * as React from 'react';
-import { IProduct } from '../ProductModel';
-import Product from './ProductItem';
+import ProductItem, { IProductsOpts } from './ProductItem';
 
 interface IPropsProductList {
-    products: IProduct[];
+    products: IProductsOpts[];
+    toggleCart?: (id: number) => void;
 }
 
 
-export default class Products extends React.Component<IPropsProductList> {
+export default class ProductList extends React.Component<IPropsProductList> {
     render() {
         return (
         <div className="product-list">
             {this.props.products.map(product =>
-                <Product
+                <ProductItem
                     {...product}
+                    toggleCart={() => this.props.toggleCart && this.props.toggleCart(product.id)}
                     key={product.id} />
             )}
         </div>

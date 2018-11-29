@@ -1,5 +1,5 @@
 import AppStorage from '@/reducers';
-import Basket from '@modules/basket';
+import Cart from '@modules/cart';
 import PageNotFound from '@modules/pageNotFound';
 import Products from '@modules/products';
 import * as React from 'react';
@@ -19,7 +19,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route exact path="/" component={Products} />
-        <Route path="/basket" component={Basket} />
+        <Route path="/cart" component={Cart} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

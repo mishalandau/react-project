@@ -10,6 +10,7 @@
   "rules": {
     "member-access": [false, "check-accessor"],
     "jsx-boolean-value": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "jsx-no-lambda": false
   }
 }

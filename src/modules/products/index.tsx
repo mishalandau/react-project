@@ -1,65 +1,85 @@
+import * as cartStore from '@modules/cart/store/actions';
 import ProductList from '@modules/products/components/ProductList';
+import * as productsStore from '@modules/products/store/actions';
 import * as React from 'react';
 import { connect } from 'react-redux'
 import HeaderButtons from './components/HeaderButtons';
+import { IProduct } from './ProductModel';
 import './products.css';
 
-interface IPropProducts {
-    products?: any;
-    dispatch?: (action: any) => void;
+
+interface IStateProducts {
+    isAddProducts: boolean;
 }
 
-@(connect((state: any): IPropProducts => {
+interface IPropProducts extends IStateProducts {
+    products?: IProduct[];
+    selectedProducts?: number[];
+    nextId: number;
+    history?: any;
+    dispatch: (action: any) => Promise<any>;
+}
+
+@(connect((state: any) => {
     return {
-        products: state.products,
+        nextId: state.products.nextId,
+        products: state.products.data,
+        selectedProducts: state.cart.productsIds,
     };
 }) as any)
-export default class Products extends React.Component<IPropProducts> {
+export default class Products extends React.Component<IPropProducts, IStateProducts> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            isAddProducts: true,
+        };
+    }
     addProducts() {
-        // tslint:disable-next-line:no-console
-        console.log('add products');
+        if (!this.state.isAddProducts) {
+            return;
+        }
+
+        this.props.dispatch(productsStore.addProducts(this.props.nextId)).catch(() => {
+            this.setState({
+                isAddProducts: false,
+            });
+        });
     }
 
-    addToBasket() {
-        // tslint:disable-next-line:no-console
-        console.log('add to basket');
+    redirectToCart() {
+        this.props.history.push('/cart');
     }
+
+    componentDidMount() {
+        this.addProducts();
+    }
+
+    toggleCart(id: number) {
+        this.props.dispatch(cartStore.toggleCart(id));
+    }
+
+    get products() {
+        return (this.props.products as any[]).map((product) => {
+            return {
+                ...product,
+                isSelected: this.props.selectedProducts &&
+                    this.props.selectedProducts.includes(product.id),
+            };
+        });
+    }
+
 
     render() {
-        // tslint:disable-next-line:no-console
-        console.log(this.props.products);
-        const products = [
-            {
-                id: 1,
-                name: 'product 1',
-                color: '#54938b',
-                textColor: '#ffffff',
-            },
-            {
-                id: 2,
-                name: 'product 2',
-                color: '#295575',
-                textColor: '#ffffff',
-            },
-            {
-                id: 3,
-                name: 'product 3',
-                color: '#4361ae',
-                textColor: '#ffffff',
-            },
-            {
-                id: 4,
-                name: 'product 4',
-                color: '#3566b0',
-                textColor: '#ffffff',
-            },
-        ];
-
         return (
-        <div className="products">
-            <HeaderButtons addProducts={this.addProducts} addToBasket={this.addToBasket} />
-            <ProductList products={products} />
-        </div>
+            <div className="products">
+                <HeaderButtons
+                    isAddProducts={this.state.isAddProducts}
+                    addProducts={() => this.addProducts()}
+                    addToCart={() => this.redirectToCart()} />
+                <ProductList
+                    toggleCart={(id) => this.toggleCart(id)}
+                    products={this.products} />
+            </div>
         );
     }
 }
